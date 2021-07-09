@@ -1,0 +1,31 @@
+.navbar {
+  @apply fixed w-full z-10 top-0;
+}
+
+.navbar-content-wrapper {
+  @apply w-full md:max-w-4xl mx-auto flex flex-wrap items-center justify-between mt-0 py-3;
+}
+
+.navbar-brand {
+  @apply text-gray-900 text-base no-underline hover:no-underline font-extrabold text-xl;
+}
+
+.navbar-menu {
+  @apply flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-900 hover:border-green-500 appearance-none focus:outline-none;
+}
+
+.navbar-content {
+  @apply w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block mt-2 lg:mt-0 md:bg-transparent z-20;
+}
+
+.navbar-links {
+  @apply lg:flex justify-end flex-1 items-center;
+}
+
+.navbar-links-item.router-link-active {
+  @apply text-gray-900 font-bold no-underline;
+}
+
+.navbar-links-item {
+  @apply inline-block text-gray-600 no-underline hover:text-gray-900 hover:underline py-2 px-4;
+}

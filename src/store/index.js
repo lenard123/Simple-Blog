@@ -1,10 +1,13 @@
 import { createStore } from 'vuex'
 import { db, auth } from '@/firebase/index.js'
 
+window.db = db
+
 const store = createStore({
     state: () => ({
         user: null,
         posts: [],
+        hasInitialized: false
     }),
 
     mutations: {
@@ -32,6 +35,9 @@ const store = createStore({
             }
         },
 
+        INITIALIZED: (state) => {
+            state.hasInitialized = true
+        }
     },
 
     getters: {
@@ -51,20 +57,33 @@ const store = createStore({
         },
 
         bindPosts: ({ commit }) => {
-            db.collection('posts').select('title').onSnapshot( ref => {
+            db.collection('posts').onSnapshot( ref => {
                 ref.docChanges().forEach(change => {
                     commit('CHANGE_POSTS', change)
                 })
+                commit('INITIALIZED')
             })
         },
 
-        createPost: (context, postData) => {
-            return db.collection('posts').add(postData)
+        createPost: (context, {title, description, content}) => {
+
+            const batch = db.batch()
+            const postsRef = db.collection('posts')
+            const contentsRef = db.collection('contents')
+
+            const postRef = postsRef.doc()
+            const contentRef = contentsRef.doc()
+
+            batch.set(postRef, {title, description, contentRef: `contents/${contentRef.id}` } )
+            batch.set(contentRef, {content})
+
+            batch.commit()
         },
 
         getPost: async (context, id) => {
-            const post = await db.collection('posts').doc(id).get()
-            return post.data()
+            const post = context.state.posts.find(post => post.id === id) || (await db.collection('posts').doc(id).get()).data()
+            post.content = (await db.doc(post.contentRef).get()).data().content
+            return post
         },
 
         login: async (context, { email, password}) => {

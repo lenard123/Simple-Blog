@@ -1,0 +1,14 @@
+/** MY CSS CODES **/
+
+.spin {
+    animation: anim-spin infinite 3s linear;
+}
+
+@keyframes anim-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}  

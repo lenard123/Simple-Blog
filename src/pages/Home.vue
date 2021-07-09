@@ -1,9 +1,6 @@
 <template>
-  <div>
-    <h2>Home</h2>
-
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 px-4 sm:px-0">
     <Post v-for="post in posts" :post="post" :key="post.id"/>
-
   </div>
 </template>
 
@@ -24,6 +21,8 @@ export default {
     const store = useStore()
 
     const posts = computed(() => store.state.posts)
+
+    document.title = "My Personal Blog"
 
     return { posts }
 
