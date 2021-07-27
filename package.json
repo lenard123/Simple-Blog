@@ -9,13 +9,26 @@
     "watch": "vue-cli-service build --mode development --watch"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-alignment": "^29.0.0",
+    "@ckeditor/ckeditor5-build-classic": "^29.0.0",
+    "@ckeditor/ckeditor5-dev-utils": "^25.2.6",
+    "@ckeditor/ckeditor5-dev-webpack-plugin": "^25.2.6",
+    "@ckeditor/ckeditor5-editor-inline": "^29.0.0",
+    "@ckeditor/ckeditor5-horizontal-line": "^29.0.0",
+    "@ckeditor/ckeditor5-theme-lark": "^29.0.0",
+    "@ckeditor/ckeditor5-vue": "^2.0.1",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "firebase": "^8.7.0",
+    "moment": "^2.29.1",
+    "postcss-loader": "^3.0.0",
+    "raw-loader": "^0.5.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.10",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^3.0.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
@@ -37,7 +50,9 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "no-extra-parens": ["error"]
+    }
   },
   "browserslist": [
     "> 1%",
